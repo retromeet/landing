@@ -8,8 +8,11 @@ layout: default
       <div class="mb-6 pb-3 columns is-multiline">
         <div class="column is-12 is-6-desktop mx-auto has-text-centered">
           <h2 class="mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">The open-source dating app that respects your privacy</h2>
-          <p class="subtitle has-text-grey mb-5">A dating app should help you find people you click with, not sell your data and make you keep coming back.</p>
+          <p class="subtitle has-text-grey mb-5">A dating app should help you find people you click with; we do not sell your data and do not want to make you keep coming back.</p>
         </div>
+      </div>
+      <div class="buttons has-addons is-centered">
+      <button class="button is-primary is-large is-centered">Coming soon!</button>
       </div>
       <div class="fixed-grid">
         <div class="grid">
