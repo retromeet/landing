@@ -1,0 +1,1233 @@
+{
+  "info": {
+    "title": "RetroMeet API",
+    "description": "This is the API that RetroMeet makes available for all apps that will use it.",
+    "license": {
+      "name": "GNU Affero General Public License v3.0",
+      "url": "https://raw.githubusercontent.com/retromeet/core/refs/heads/main/LICENSE"
+    },
+    "version": "0.1.0-alpha.1"
+  },
+  "swagger": "2.0",
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "jwt_token": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "A JWT token that can be obtained by calling the login endpoint.",
+      "authorizationUrl": "/login"
+    }
+  },
+  "security": {
+    "jwt_token": []
+  },
+  "host": "example.org",
+  "tags": [
+    {
+      "name": "profile",
+      "description": "Operations about profiles"
+    },
+    {
+      "name": "search",
+      "description": "Operations about searches"
+    },
+    {
+      "name": "listing",
+      "description": "Operations about listings"
+    },
+    {
+      "name": "conversations",
+      "description": "Operations about conversations"
+    }
+  ],
+  "paths": {
+    "/api/profile/info": {
+      "get": {
+        "description": "Returns basic profile information that can be used to display information about the current logged-in user",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The profile info for the authenticated user",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_ProfileInfo"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "profile"
+        ],
+        "operationId": "getApiProfileInfo"
+      }
+    },
+    "/api/profile/complete": {
+      "get": {
+        "description": "Returns the complete profile information of the logged-in user. This can be used to display how their profile currently looks like to others.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The profile for the authenticated user",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_ProfileInfo"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "profile"
+        ],
+        "operationId": "getApiProfileComplete"
+      },
+      "post": {
+        "description": "Updates the current user's profile with the given parameters. The return will only contain fields that could have been modified.",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "postApiProfileComplete",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/postApiProfileComplete"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The profile for the authenticated user",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_ProfileInfo"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "profile"
+        ],
+        "operationId": "postApiProfileComplete"
+      }
+    },
+    "/api/profile/location": {
+      "post": {
+        "description": "Updates the current user's profile location with the given place.",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "postApiProfileLocation",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/postApiProfileLocation"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The profile for the authenticated user",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_ProfileInfo"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "profile"
+        ],
+        "operationId": "postApiProfileLocation"
+      }
+    },
+    "/api/profile/{id}/complete": {
+      "get": {
+        "description": "Returns the complete profile information for the requested account id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The profile for the account id, if exists",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_OtherProfileInfo"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "profile"
+        ],
+        "operationId": "getApiProfileIdComplete"
+      }
+    },
+    "/api/search/address": {
+      "post": {
+        "description": "Given an address, searches for a geolocation using one location provider. It takes the language of the current user in consideration.",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "postApiSearchAddress",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/postApiSearchAddress"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "One or more locations",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_Entities_LocationResult"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "search"
+        ],
+        "operationId": "postApiSearchAddress"
+      }
+    },
+    "/api/listing": {
+      "get": {
+        "description": "Returns a list of nearby profiles to the logged-in user.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "max_distance",
+            "description": "The maximum distance, in kilometers, to show the profiles away from the users'",
+            "type": "integer",
+            "format": "int32",
+            "default": 5,
+            "minimum": 5,
+            "maximum": 400,
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of profiles",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_OtherProfileInfos"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "listing"
+        ],
+        "operationId": "getApiListing"
+      }
+    },
+    "/api/conversations": {
+      "get": {
+        "description": "Returns the conversations that the logged-in has going on",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of conversations",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Conversations"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "conversations"
+        ],
+        "operationId": "getApiConversations"
+      },
+      "post": {
+        "description": "Creates a conversation with another user.",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "postApiConversations",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/postApiConversations"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "A list of conversations",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Conversations"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "conversations"
+        ],
+        "operationId": "postApiConversations"
+      }
+    },
+    "/api/conversations/{conversation_id}": {
+      "get": {
+        "description": "Returns a single conversation for the logged-in user",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_id",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A conversation",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Conversation"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "conversations"
+        ],
+        "operationId": "getApiConversationsConversationId"
+      }
+    },
+    "/api/conversations/{conversation_id}/viewed": {
+      "put": {
+        "description": "Updates the last_seen_at for the current logged-in user",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_id",
+            "type": "integer",
+            "format": "int32",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Time was updated"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "conversations"
+        ],
+        "operationId": "putApiConversationsConversationIdViewed"
+      }
+    },
+    "/api/conversations/{conversation_id}/messages": {
+      "get": {
+        "description": "Returns 20 messages from the requested conversation. Params can be used to paginate the conversation and get more messages.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_id",
+            "type": "integer",
+            "format": "int32",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "min_id",
+            "description": "The min id to filter by, can be used to get new messages after the one the user has",
+            "type": "integer",
+            "format": "int32",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "max_id",
+            "description": "The max id to filter by, should be used to paginate messages back in time",
+            "type": "integer",
+            "format": "int32",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of messages",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Messages"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "conversations"
+        ],
+        "operationId": "getApiConversationsConversationIdMessages"
+      },
+      "post": {
+        "description": "Creates a single message in the given conversation.",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_id",
+            "type": "integer",
+            "format": "int32",
+            "required": true
+          },
+          {
+            "name": "postApiConversationsConversationIdMessages",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/postApiConversationsConversationIdMessages"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The recently created message",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Message"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "conversations"
+        ],
+        "operationId": "postApiConversationsConversationIdMessages"
+      }
+    }
+  },
+  "definitions": {
+    "API_Entities_ProfileInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "birth_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "about_me": {
+          "type": "string"
+        },
+        "genders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "orientations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relationship_status": {
+          "type": "string"
+        },
+        "relationship_type": {
+          "type": "string"
+        },
+        "tobacco": {
+          "type": "string"
+        },
+        "alcohol": {
+          "type": "string"
+        },
+        "marijuana": {
+          "type": "string"
+        },
+        "other_recreational_drugs": {
+          "type": "string"
+        },
+        "pets": {
+          "type": "string"
+        },
+        "wants_pets": {
+          "type": "string"
+        },
+        "kids": {
+          "type": "string"
+        },
+        "wants_kids": {
+          "type": "string"
+        },
+        "religion": {
+          "type": "string"
+        },
+        "religion_importance": {
+          "type": "string"
+        },
+        "location_display_name": {
+          "type": "object"
+        }
+      },
+      "description": "API_Entities_ProfileInfo model"
+    },
+    "API_Entities_Error": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/definitions/API_Entities_ErrorDetail"
+        }
+      },
+      "description": "API_Entities_Error model"
+    },
+    "API_Entities_ErrorDetail": {
+      "type": "object",
+      "properties": {
+        "fields": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "string"
+        }
+      }
+    },
+    "postApiProfileComplete": {
+      "type": "object",
+      "properties": {
+        "about_me": {
+          "type": "string",
+          "description": "The about me text for the profile"
+        },
+        "display_name": {
+          "type": "string",
+          "description": "The name that is displayed for other users"
+        },
+        "genders": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "man",
+              "woman",
+              "non_binary",
+              "genderqueer",
+              "genderfluid",
+              "gender_non_conforming",
+              "transgender",
+              "trans_man",
+              "transmasculine",
+              "trans_woman",
+              "transfeminine",
+              "transsexual",
+              "agender",
+              "bigender",
+              "pangender",
+              "two_spirit",
+              "intersex",
+              "androgynous",
+              "questioning",
+              "unsure"
+            ]
+          }
+        },
+        "orientations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "straight",
+              "bisexual",
+              "heteroflexible",
+              "homoflexible",
+              "gay",
+              "lesbian",
+              "queer",
+              "pansexual",
+              "omnisexual",
+              "abrosexual",
+              "demisexual",
+              "asexual",
+              "greysexual",
+              "reciprosexual",
+              "demiromantic",
+              "aromantic",
+              "greyromantic",
+              "fluid",
+              "fluctuating",
+              "unsure",
+              "questioning"
+            ]
+          }
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "abk",
+              "aar",
+              "afr",
+              "aka",
+              "sqi",
+              "amh",
+              "ara",
+              "arg",
+              "hye",
+              "asm",
+              "ava",
+              "ave",
+              "aym",
+              "aze",
+              "bam",
+              "bak",
+              "eus",
+              "bel",
+              "ben",
+              "bis",
+              "bos",
+              "bre",
+              "bul",
+              "mya",
+              "cat",
+              "cha",
+              "che",
+              "nya",
+              "zho",
+              "chu",
+              "chv",
+              "cor",
+              "cos",
+              "cre",
+              "hrv",
+              "ces",
+              "dan",
+              "div",
+              "nld",
+              "dzo",
+              "eng",
+              "epo",
+              "est",
+              "ewe",
+              "fao",
+              "fij",
+              "fin",
+              "fra",
+              "fry",
+              "ful",
+              "gla",
+              "glg",
+              "lug",
+              "kat",
+              "deu",
+              "ell",
+              "kal",
+              "grn",
+              "guj",
+              "hat",
+              "hau",
+              "heb",
+              "her",
+              "hin",
+              "hmo",
+              "hun",
+              "isl",
+              "ido",
+              "ibo",
+              "ind",
+              "ina",
+              "ile",
+              "iku",
+              "ipk",
+              "gle",
+              "ita",
+              "jpn",
+              "jav",
+              "kan",
+              "kau",
+              "kas",
+              "kaz",
+              "khm",
+              "kik",
+              "kin",
+              "kir",
+              "kom",
+              "kon",
+              "kor",
+              "kua",
+              "kur",
+              "lao",
+              "lat",
+              "lav",
+              "lim",
+              "lin",
+              "lit",
+              "lub",
+              "ltz",
+              "mkd",
+              "mlg",
+              "msa",
+              "mal",
+              "mlt",
+              "glv",
+              "mri",
+              "mar",
+              "mah",
+              "mon",
+              "nau",
+              "nav",
+              "nde",
+              "nbl",
+              "ndo",
+              "nep",
+              "nor",
+              "nob",
+              "nno",
+              "oci",
+              "oji",
+              "ori",
+              "orm",
+              "oss",
+              "pli",
+              "pus",
+              "fas",
+              "pol",
+              "por",
+              "pan",
+              "que",
+              "ron",
+              "roh",
+              "run",
+              "rus",
+              "sme",
+              "smo",
+              "sag",
+              "san",
+              "srd",
+              "srp",
+              "sna",
+              "snd",
+              "sin",
+              "slk",
+              "slv",
+              "som",
+              "sot",
+              "spa",
+              "sun",
+              "swa",
+              "ssw",
+              "swe",
+              "tgl",
+              "tah",
+              "tgk",
+              "tam",
+              "tat",
+              "tel",
+              "tha",
+              "bod",
+              "tir",
+              "ton",
+              "tso",
+              "tsn",
+              "tur",
+              "tuk",
+              "twi",
+              "uig",
+              "ukr",
+              "urd",
+              "uzb",
+              "ven",
+              "vie",
+              "vol",
+              "wln",
+              "cym",
+              "wol",
+              "xho",
+              "iii",
+              "yid",
+              "yor",
+              "zha",
+              "zul"
+            ]
+          }
+        },
+        "relationship_type": {
+          "type": "string",
+          "enum": [
+            "monogamous",
+            "non_monogamous"
+          ]
+        },
+        "relationship_status": {
+          "type": "string",
+          "enum": [
+            "single",
+            "partnered",
+            "married"
+          ]
+        },
+        "religion": {
+          "type": "string",
+          "enum": [
+            "agnosticism",
+            "atheism",
+            "buddhism",
+            "candomble",
+            "catholicism",
+            "christianity",
+            "hinduism",
+            "islam",
+            "judaism",
+            "rastafari",
+            "sikh",
+            "spiritism",
+            "umbanda",
+            "other"
+          ]
+        },
+        "religion_importance": {
+          "type": "string",
+          "enum": [
+            "important",
+            "not_important",
+            "do_not_care"
+          ]
+        },
+        "tobacco": {
+          "type": "string",
+          "enum": [
+            "never",
+            "sometimes",
+            "often"
+          ]
+        },
+        "marijuana": {
+          "type": "string",
+          "enum": [
+            "never",
+            "sometimes",
+            "often"
+          ]
+        },
+        "alcohol": {
+          "type": "string",
+          "enum": [
+            "never",
+            "sometimes",
+            "often"
+          ]
+        },
+        "other_recreational_drugs": {
+          "type": "string",
+          "enum": [
+            "never",
+            "sometimes",
+            "often"
+          ]
+        },
+        "kids": {
+          "type": "string",
+          "enum": [
+            "have",
+            "have_not"
+          ]
+        },
+        "wants_kids": {
+          "type": "string",
+          "enum": [
+            "want_more",
+            "do_not_want_more",
+            "want_some",
+            "do_not_want_any",
+            "dont_know",
+            "maybe"
+          ]
+        },
+        "pets": {
+          "type": "string",
+          "enum": [
+            "have",
+            "have_not"
+          ]
+        },
+        "wants_pets": {
+          "type": "string",
+          "enum": [
+            "want_more",
+            "do_not_want_more",
+            "want_some",
+            "do_not_want_any",
+            "dont_know",
+            "maybe"
+          ]
+        }
+      },
+      "description": "Updates the current user's profile with the given parameters. The return will only contain fields that could have been modified."
+    },
+    "postApiProfileLocation": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The place you're updating to. It should be one of the responses from /api/search/address"
+        },
+        "osm_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The id of the place you're updating to. It should be in one of the responses from /api/search/address"
+        }
+      },
+      "required": [
+        "location",
+        "osm_id"
+      ],
+      "description": "Updates the current user's profile location with the given place."
+    },
+    "API_Entities_OtherProfileInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "about_me": {
+          "type": "string"
+        },
+        "genders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "orientations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relationship_status": {
+          "type": "string"
+        },
+        "relationship_type": {
+          "type": "string"
+        },
+        "tobacco": {
+          "type": "string"
+        },
+        "alcohol": {
+          "type": "string"
+        },
+        "marijuana": {
+          "type": "string"
+        },
+        "other_recreational_drugs": {
+          "type": "string"
+        },
+        "pets": {
+          "type": "string"
+        },
+        "wants_pets": {
+          "type": "string"
+        },
+        "kids": {
+          "type": "string"
+        },
+        "wants_kids": {
+          "type": "string"
+        },
+        "religion": {
+          "type": "string"
+        },
+        "religion_importance": {
+          "type": "string"
+        },
+        "location_display_name": {
+          "type": "object"
+        },
+        "location_distance": {
+          "type": "number",
+          "format": "float"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "description": "API_Entities_OtherProfileInfo model"
+    },
+    "postApiSearchAddress": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The place you want to look for",
+          "example": "Méier, Rio de Janeiro, Brasil"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of results to return",
+          "minimum": 0,
+          "maximum": 10,
+          "default": 10
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "description": "Given an address, searches for a geolocation using one location provider. It takes the language of the current user in consideration."
+    },
+    "API_Entities_LocationResult": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "format": "float"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "osm_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "osm_type": {
+          "type": "string"
+        }
+      },
+      "description": "API_Entities_LocationResult model"
+    },
+    "API_Entities_OtherProfileInfos": {
+      "type": "object",
+      "properties": {
+        "profiles": {
+          "$ref": "#/definitions/API_Entities_OtherProfileInfo"
+        }
+      },
+      "description": "API_Entities_OtherProfileInfos model"
+    },
+    "API_Entities_Conversations": {
+      "type": "object",
+      "properties": {
+        "conversations": {
+          "$ref": "#/definitions/API_Entities_Conversation"
+        }
+      },
+      "description": "API_Entities_Conversations model"
+    },
+    "API_Entities_Conversation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "other_profile": {
+          "$ref": "#/definitions/API_Entities_OtherProfileInfo"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "last_seen_at": {
+          "type": "NilClass"
+        },
+        "new_messages_preview": {
+          "type": "string"
+        }
+      },
+      "description": "API_Entities_Conversation model"
+    },
+    "postApiConversations": {
+      "type": "object",
+      "properties": {
+        "other_profile_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "other_profile_id"
+      ],
+      "description": "Creates a conversation with another user."
+    },
+    "API_Entities_Messages": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "$ref": "#/definitions/API_Entities_Message"
+        }
+      },
+      "description": "API_Entities_Messages model"
+    },
+    "API_Entities_Message": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sender": {
+          "type": "string"
+        },
+        "sent_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "description": "API_Entities_Message model"
+    },
+    "postApiConversationsConversationIdMessages": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the message"
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "description": "Creates a single message in the given conversation."
+    }
+  }
+}

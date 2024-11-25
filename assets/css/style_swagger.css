@@ -1,0 +1,10 @@
+.swagger-ui pre.version {
+  background-color: #7d8492;
+}
+.swagger-ui .version-stamp pre.version {
+  background-color: #89bf04;
+}
+
+.swagger-ui div.scheme-container {
+  background-color: inherit ;
+}
