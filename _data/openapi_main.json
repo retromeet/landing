@@ -12,6 +12,9 @@
   "produces": [
     "application/json"
   ],
+  "consumes": [
+    "application/json"
+  ],
   "securityDefinitions": {
     "jwt_token": {
       "type": "apiKey",
@@ -361,6 +364,7 @@
             "in": "path",
             "name": "conversation_id",
             "type": "string",
+            "format": "uuid",
             "required": true
           }
         ],
@@ -397,8 +401,8 @@
           {
             "in": "path",
             "name": "conversation_id",
-            "type": "integer",
-            "format": "int32",
+            "type": "string",
+            "format": "uuid",
             "required": true
           }
         ],
@@ -429,8 +433,8 @@
           {
             "in": "path",
             "name": "conversation_id",
-            "type": "integer",
-            "format": "int32",
+            "type": "string",
+            "format": "uuid",
             "required": true
           },
           {
@@ -481,8 +485,8 @@
           {
             "in": "path",
             "name": "conversation_id",
-            "type": "integer",
-            "format": "int32",
+            "type": "string",
+            "format": "uuid",
             "required": true
           },
           {
@@ -1139,7 +1143,10 @@
       "type": "object",
       "properties": {
         "profiles": {
-          "$ref": "#/definitions/API_Entities_OtherProfileInfo"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/API_Entities_OtherProfileInfo"
+          }
         }
       },
       "description": "API_Entities_OtherProfileInfos model"
@@ -1148,7 +1155,10 @@
       "type": "object",
       "properties": {
         "conversations": {
-          "$ref": "#/definitions/API_Entities_Conversation"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/API_Entities_Conversation"
+          }
         }
       },
       "description": "API_Entities_Conversations model"
@@ -1167,7 +1177,8 @@
           "format": "date-time"
         },
         "last_seen_at": {
-          "type": "NilClass"
+          "type": "string",
+          "format": "date-time"
         },
         "new_messages_preview": {
           "type": "string"
@@ -1191,7 +1202,10 @@
       "type": "object",
       "properties": {
         "messages": {
-          "$ref": "#/definitions/API_Entities_Message"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/API_Entities_Message"
+          }
         }
       },
       "description": "API_Entities_Messages model"
