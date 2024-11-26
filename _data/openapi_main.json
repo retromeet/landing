@@ -65,6 +65,12 @@
             "schema": {
               "$ref": "#/definitions/API_Entities_Error"
             }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
           }
         },
         "tags": [
@@ -88,6 +94,12 @@
           },
           "401": {
             "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
             "schema": {
               "$ref": "#/definitions/API_Entities_Error"
             }
@@ -117,14 +129,26 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "The profile for the authenticated user",
             "schema": {
               "$ref": "#/definitions/API_Entities_ProfileInfo"
             }
           },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
           "401": {
             "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
             "schema": {
               "$ref": "#/definitions/API_Entities_Error"
             }
@@ -156,14 +180,32 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "The profile for the authenticated user",
             "schema": {
               "$ref": "#/definitions/API_Entities_ProfileInfo"
             }
           },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
           "401": {
             "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
             "schema": {
               "$ref": "#/definitions/API_Entities_Error"
             }
@@ -197,8 +239,20 @@
               "$ref": "#/definitions/API_Entities_OtherProfileInfo"
             }
           },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
           "401": {
             "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
             "schema": {
               "$ref": "#/definitions/API_Entities_Error"
             }
@@ -239,8 +293,20 @@
               }
             }
           },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
           "401": {
             "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
             "schema": {
               "$ref": "#/definitions/API_Entities_Error"
             }
@@ -278,8 +344,20 @@
               "$ref": "#/definitions/API_Entities_OtherProfileInfos"
             }
           },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
           "401": {
             "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
             "schema": {
               "$ref": "#/definitions/API_Entities_Error"
             }
@@ -304,8 +382,20 @@
               "$ref": "#/definitions/API_Entities_Conversations"
             }
           },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
           "401": {
             "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
             "schema": {
               "$ref": "#/definitions/API_Entities_Error"
             }
@@ -341,8 +431,20 @@
               "$ref": "#/definitions/API_Entities_Conversations"
             }
           },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
           "401": {
             "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
             "schema": {
               "$ref": "#/definitions/API_Entities_Error"
             }
@@ -376,8 +478,20 @@
               "$ref": "#/definitions/API_Entities_Conversation"
             }
           },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
           "401": {
             "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
             "schema": {
               "$ref": "#/definitions/API_Entities_Error"
             }
@@ -411,8 +525,20 @@
           "204": {
             "description": "Time was updated"
           },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
           "401": {
             "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
             "schema": {
               "$ref": "#/definitions/API_Entities_Error"
             }
@@ -462,8 +588,20 @@
               "$ref": "#/definitions/API_Entities_Messages"
             }
           },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
           "401": {
             "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
             "schema": {
               "$ref": "#/definitions/API_Entities_Error"
             }
@@ -506,8 +644,20 @@
               "$ref": "#/definitions/API_Entities_Message"
             }
           },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
           "401": {
             "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
             "schema": {
               "$ref": "#/definitions/API_Entities_Error"
             }
