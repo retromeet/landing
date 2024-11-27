@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', () => {
+
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+
+    });
+  });
+});
+</script>
+  {%- include head.html -%}
+
+  <body>
+
+    {%- include header.html -%}
+
+    <div class='container'>
+      <div class='columns'>
+        <div class='column is-3'>
+          <aside class='menu'>
+            <ul class='menu-list'>
+                <li class='my-1'>
+                  <a href="/dev">Development docs</a>
+                </li>
+              {% for doc in site.dev_docs %}
+                {% if doc.root %}
+                  <li class='my-1'>
+                    <a href="{{doc.url}}">{{doc.title}}</a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </aside>
+        </div>
+        <div class='column is-9'>
+          <div class="content">
+            {{ content }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- include footer.html -%}
+
+  </body>
+
+</html>

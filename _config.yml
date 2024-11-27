@@ -49,3 +49,9 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+collections:
+  dev_docs:
+   output: true
+  redirects:
+   output: true

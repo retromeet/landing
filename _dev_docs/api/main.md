@@ -1,7 +1,7 @@
 ---
 layout: base_swagger
 title: API documentation (main branch)
-permalink: /api/main/
+permalink: /dev/api/main/
 lang: "en"
 ---
 <div class="section">
