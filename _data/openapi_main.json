@@ -217,6 +217,46 @@
         "operationId": "postApiProfileLocation"
       }
     },
+    "/api/profile/picture": {
+      "post": {
+        "description": "Endpoint that accepts a new profile picture",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "profile_picture",
+            "type": "file",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Updated sucessfully"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "profile"
+        ],
+        "operationId": "postApiProfilePicture"
+      }
+    },
     "/api/profile/{id}/complete": {
       "get": {
         "description": "Returns the complete profile information for the requested account id.",
@@ -680,13 +720,6 @@
         "display_name": {
           "type": "string"
         },
-        "created_at": {
-          "type": "string"
-        },
-        "birth_date": {
-          "type": "string",
-          "format": "date"
-        },
         "about_me": {
           "type": "string"
         },
@@ -746,6 +779,16 @@
         },
         "location_display_name": {
           "type": "object"
+        },
+        "picture": {
+          "type": "string"
+        },
+        "birth_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "created_at": {
+          "type": "string"
         }
       },
       "description": "API_Entities_ProfileInfo model"
@@ -1240,6 +1283,9 @@
         "age": {
           "type": "integer",
           "format": "int32"
+        },
+        "picture": {
+          "type": "string"
         }
       },
       "description": "API_Entities_OtherProfileInfo model"
