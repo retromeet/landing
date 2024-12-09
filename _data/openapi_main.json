@@ -780,6 +780,10 @@
         "location_display_name": {
           "type": "object"
         },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
         "picture": {
           "type": "string"
         },
@@ -789,6 +793,9 @@
         },
         "created_at": {
           "type": "string"
+        },
+        "hide_age": {
+          "type": "boolean"
         }
       },
       "description": "API_Entities_ProfileInfo model"
@@ -1184,6 +1191,9 @@
             "dont_know",
             "maybe"
           ]
+        },
+        "hide_age": {
+          "type": "boolean"
         }
       },
       "description": "Updates the current user's profile with the given parameters. The return will only contain fields that could have been modified."
