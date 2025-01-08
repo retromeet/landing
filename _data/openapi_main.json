@@ -259,7 +259,7 @@
     },
     "/api/profile/{id}/complete": {
       "get": {
-        "description": "Returns the complete profile information for the requested account id.",
+        "description": "Returns the complete profile information for the requested profile id.",
         "produces": [
           "application/json"
         ],
@@ -302,6 +302,95 @@
           "profile"
         ],
         "operationId": "getApiProfileIdComplete"
+      }
+    },
+    "/api/profile/{id}/block": {
+      "post": {
+        "description": "Creates a block against the requested profile id",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Updated sucessfully"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "profile"
+        ],
+        "operationId": "postApiProfileIdBlock"
+      },
+      "delete": {
+        "description": "Deletes a block against the requested profile id, if exist",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Updated sucessfully"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "profile"
+        ],
+        "operationId": "deleteApiProfileIdBlock"
       }
     },
     "/api/search/address": {
@@ -783,6 +872,9 @@
         "age": {
           "type": "integer",
           "format": "int32"
+        },
+        "is_blocked": {
+          "type": "boolean"
         },
         "picture": {
           "type": "string"
@@ -1293,6 +1385,9 @@
         "age": {
           "type": "integer",
           "format": "int32"
+        },
+        "is_blocked": {
+          "type": "boolean"
         },
         "picture": {
           "type": "string"
