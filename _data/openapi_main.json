@@ -572,6 +572,12 @@
               "$ref": "#/definitions/API_Entities_Error"
             }
           },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
           "500": {
             "description": "Server error",
             "schema": {
