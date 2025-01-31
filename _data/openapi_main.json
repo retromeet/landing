@@ -44,6 +44,10 @@
     {
       "name": "conversations",
       "description": "Operations about conversations"
+    },
+    {
+      "name": "reports",
+      "description": "Operations about reports"
     }
   ],
   "paths": {
@@ -391,6 +395,65 @@
           "profile"
         ],
         "operationId": "deleteApiProfileIdBlock"
+      }
+    },
+    "/api/profile/{id}/conversation": {
+      "get": {
+        "description": "Returns an existing conversation between the logged-in user and the user id, if it exists",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The profile for the account id, if exists",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Conversation"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "profile"
+        ],
+        "operationId": "getApiProfileIdConversation"
       }
     },
     "/api/search/address": {
@@ -803,6 +866,60 @@
         ],
         "operationId": "postApiConversationsConversationIdMessages"
       }
+    },
+    "/api/reports": {
+      "post": {
+        "description": "Creates a report about a user. It can include messages or not",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "postApiReports",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/postApiReports"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Created successfully"
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/API_Entities_Error"
+            }
+          }
+        },
+        "tags": [
+          "reports"
+        ],
+        "operationId": "postApiReports"
+      }
     }
   },
   "definitions": {
@@ -905,7 +1022,10 @@
           "type": "string"
         },
         "details": {
-          "$ref": "#/definitions/API_Entities_ErrorDetail"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/API_Entities_ErrorDetail"
+          }
         }
       },
       "description": "API_Entities_Error model"
@@ -914,10 +1034,16 @@
       "type": "object",
       "properties": {
         "fields": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "errors": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1401,6 +1527,29 @@
       },
       "description": "API_Entities_OtherProfileInfo model"
     },
+    "API_Entities_Conversation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "other_profile": {
+          "$ref": "#/definitions/API_Entities_OtherProfileInfo"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "last_seen_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "new_messages_preview": {
+          "type": "string"
+        }
+      },
+      "description": "API_Entities_Conversation model"
+    },
     "postApiSearchAddress": {
       "type": "object",
       "properties": {
@@ -1471,29 +1620,6 @@
       },
       "description": "API_Entities_Conversations model"
     },
-    "API_Entities_Conversation": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "other_profile": {
-          "$ref": "#/definitions/API_Entities_OtherProfileInfo"
-        },
-        "created_at": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "last_seen_at": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "new_messages_preview": {
-          "type": "string"
-        }
-      },
-      "description": "API_Entities_Conversation model"
-    },
     "postApiConversations": {
       "type": "object",
       "properties": {
@@ -1551,6 +1677,44 @@
         "content"
       ],
       "description": "Creates a single message in the given conversation."
+    },
+    "postApiReports": {
+      "type": "object",
+      "properties": {
+        "target_profile_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "spam",
+            "intimidation",
+            "harassment",
+            "minors",
+            "against_rules",
+            "illegal",
+            "other"
+          ]
+        },
+        "comment": {
+          "type": "string",
+          "description": "The reason for the report, can be ommited."
+        },
+        "message_ids": {
+          "type": "array",
+          "description": "Can include some messages by target_profile that are being reported",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "target_profile_id",
+        "type"
+      ],
+      "description": "Creates a report about a user. It can include messages or not"
     }
   }
 }
