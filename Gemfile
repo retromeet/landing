@@ -11,7 +11,7 @@ ruby file: ".ruby-version"
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~> 4.4.0"
+gem "jekyll", "~> 4.4.1"
 
 group :development, :test do
   gem "rubocop", require: false # A static code analyzer and formatter
