@@ -12,6 +12,7 @@ ruby file: ".ruby-version"
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
 gem "jekyll", "~> 4.4.0"
+gem "jekyll-compose"
 
 group :development, :test do
   gem "rubocop", require: false # A static code analyzer and formatter
@@ -26,6 +27,8 @@ end
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   gem "jekyll-seo-tag"
+  gem "jekyll-paginate"
+  gem "jekyll-feed"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem

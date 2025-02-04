@@ -1,0 +1,22 @@
+---
+layout: base_blog
+title: RetroMeet's blog
+---
+
+
+<div class="columns is-multiline">
+    <div class="column is-12">
+        {% include pagination.html %}
+    </div>
+    {% for post in site.posts %}
+        <div class="column is-12">
+            {% include post-card.html %}
+        </div>
+    {% endfor %}
+    <div class="column is-12">
+        {% include pagination.html %}
+    </div>
+    <div class="column is-12">
+        {% include subscribe.html %}
+    </div>
+</div>

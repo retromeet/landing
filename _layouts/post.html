@@ -1,0 +1,11 @@
+---
+layout: base_blog
+---
+<div class="content">
+    <p>Published: {{ page.date | date: '%b %-d, %Y' }} by {{ page.author }}</p>
+    {% assign author = site.authors | where: 'short_name', page.author | first %}
+    {% if author.fediverse_handle %}
+    <meta name="fediverse:creator" content="{{ author.fediverse_handle }}">
+    {% endif %}
+    {{ content }}
+</div>

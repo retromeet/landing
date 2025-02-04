@@ -29,6 +29,8 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # theme: minima
 plugins:
  - jekyll-seo-tag
+ - jekyll-paginate
+ - jekyll-feed
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -50,8 +52,18 @@ plugins:
 #   - vendor/gems/
 #   - vendor/ruby/
 
+# Jekyll-paginate config
+paginate: 5
+paginate_path: "/blog/page:num/"
+
 collections:
   dev_docs:
    output: true
   redirects:
    output: true
+
+authors:
+  renatolond:
+    short_name: renatolond
+    display_name: Renato "Lond" Cerqueira
+    fediverse_handle: "@renatolond@masto.donte.com.br"
