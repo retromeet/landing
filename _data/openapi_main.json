@@ -1002,6 +1002,9 @@
         "picture": {
           "type": "string"
         },
+        "pronouns": {
+          "type": "string"
+        },
         "birth_date": {
           "type": "string",
           "format": "date"
@@ -1416,6 +1419,9 @@
             "maybe"
           ]
         },
+        "pronouns": {
+          "type": "string"
+        },
         "hide_age": {
           "type": "boolean"
         }
@@ -1522,6 +1528,9 @@
           "type": "boolean"
         },
         "picture": {
+          "type": "string"
+        },
+        "pronouns": {
           "type": "string"
         }
       },
