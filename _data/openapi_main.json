@@ -6,7 +6,7 @@
       "name": "GNU Affero General Public License v3.0",
       "url": "https://raw.githubusercontent.com/retromeet/core/refs/heads/main/LICENSE"
     },
-    "version": "0.1.0-alpha.1"
+    "version": "0.1.0"
   },
   "swagger": "2.0",
   "produces": [
