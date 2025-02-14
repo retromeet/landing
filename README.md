@@ -7,3 +7,7 @@ This repository contains the RetroMeet landing page and docs.
 # Development
 
 RetroMeet is written in Ruby.
+
+# Thanks
+
+Part of the templates for the blog are inspired by [bulma-clean-theme by chrisrhymes](https://github.com/chrisrhymes/bulma-clean-theme), big thanks!
