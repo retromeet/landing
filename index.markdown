@@ -12,7 +12,7 @@ layout: default
         </div>
       </div>
       <div class="buttons has-addons is-centered">
-      <button class="button is-primary is-large is-centered">Coming soon!</button>
+      <a class="button is-primary is-large is-centered" href="https://framaforms.org/request-access-to-retromeet-1739534952" target="_blank">Request access!</a>
       </div>
       <div class="fixed-grid">
         <div class="grid">
