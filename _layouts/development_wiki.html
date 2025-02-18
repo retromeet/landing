@@ -28,27 +28,31 @@
 
     {%- include header.html -%}
 
-    <div class='container'>
-      <div class='columns'>
-        <div class='column is-3'>
-          <aside class='menu'>
-            <ul class='menu-list'>
-                <li class='my-1'>
-                  <a href="/dev">Development docs</a>
-                </li>
-              {% for doc in site.dev_docs %}
-                {% if doc.root %}
+    <div class='section'>
+      <div class='container'>
+        <div class='columns'>
+          <div class='column is-3'>
+            <aside class='menu'>
+              <ul class='menu-list'>
                   <li class='my-1'>
-                    <a href="{{doc.url}}">{{doc.title}}</a>
+                    <a href="/dev">Development docs</a>
                   </li>
-                {% endif %}
-              {% endfor %}
-            </ul>
-          </aside>
-        </div>
-        <div class='column is-9'>
-          <div class="content">
-            {{ content }}
+                {% for doc in site.dev_docs %}
+                  {% if doc.root %}
+                    <li class='my-1'>
+                      <a href="{{doc.url}}">{{doc.title}}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </aside>
+          </div>
+          <div class='column is-9'>
+            <div class="box">
+              <div class="content">
+                {{ content }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
