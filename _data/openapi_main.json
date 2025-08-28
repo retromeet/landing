@@ -1031,6 +1031,10 @@
           }
         }
       },
+      "required": [
+        "error",
+        "details"
+      ],
       "description": "API_Entities_Error model"
     },
     "API_Entities_ErrorDetail": {
@@ -1048,7 +1052,11 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "fields",
+        "errors"
+      ]
     },
     "postApiProfileComplete": {
       "type": "object",
@@ -1603,6 +1611,13 @@
           "type": "string"
         }
       },
+      "required": [
+        "latitude",
+        "longitude",
+        "display_name",
+        "osm_id",
+        "osm_type"
+      ],
       "description": "API_Entities_LocationResult model"
     },
     "API_Entities_OtherProfileInfos": {
@@ -1672,6 +1687,12 @@
           "type": "string"
         }
       },
+      "required": [
+        "id",
+        "sender",
+        "sent_at",
+        "content"
+      ],
       "description": "API_Entities_Message model"
     },
     "postApiConversationsConversationIdMessages": {
