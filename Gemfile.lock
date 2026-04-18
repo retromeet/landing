@@ -174,7 +174,7 @@ GEM
     unicode-display_width (2.6.0)
     wdm (0.1.1)
     webrick (1.9.1)
-    yard (0.9.38)
+    yard (0.9.42)
 
 PLATFORMS
   aarch64-linux
@@ -306,7 +306,7 @@ CHECKSUMS
   unicode-display_width (2.6.0) sha256=12279874bba6d5e4d2728cef814b19197dbb10d7a7837a869bab65da943b7f5a
   wdm (0.1.1) sha256=28406f5f236796019bea5b2a85e37cbcd229ec928c8b68261947a44eec15b474
   webrick (1.9.1) sha256=b42d3c94f166f3fb73d87e9b359def9b5836c426fc8beacf38f2184a21b2a989
-  yard (0.9.38) sha256=721fb82afb10532aa49860655f6cc2eaa7130889df291b052e1e6b268283010f
+  yard (0.9.42) sha256=4e2be01f8623556093497731d44c801e600d7c9759ec7a35a2dd5dd83bbbba68
 
 RUBY VERSION
    ruby 3.4.5p51
